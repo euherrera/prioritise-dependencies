@@ -25,7 +25,7 @@ module.exports.Run =  (input) => {
         const extract= Object.keys(parsedData.vulnerabilities).map((name )=> (
           (parsedData.vulnerabilities[name]['severity'] == 'critical') ? //test w/moderate
           (tempObjCrtitical[name] = parsedData.vulnerabilities[name], arrCritical.push(tempObjCrtitical)) : 
-          (parsedData.vulnerabilities[name]['severity'] == 'high') ? 
+          (parsedData.vulnerabilities[name]['severity'] == 'critical') ? 
           (tempObjHigh[name] = parsedData.vulnerabilities[name], arrHigh.push(tempObjHigh)) :
           (parsedData.vulnerabilities[name]['severity'] == 'moderate') ? 
           (tempObjMod[name] = parsedData.vulnerabilities[name], arrModerate.push(tempObjMod)) :
@@ -66,7 +66,8 @@ module.exports.Run =  (input) => {
      
       function assignNewObject(arr, newObj, obj) {
           obj = Object.assign({}, arr);
-          newObj.vulnerabilities = obj;
+          let vals = Object.values(obj)
+          newObj.vulnerabilities = vals;
           newObj.auditReportVersion = auditReportVersion;
           newObj.metadata = metadata;
           newObj.createdAt = new Date().toISOString();
