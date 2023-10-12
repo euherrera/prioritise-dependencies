@@ -19,7 +19,7 @@ module.exports.Run =  (input) => {
         let metadata = parsedData.metadata;
 
         const extract= Object.keys(parsedData.vulnerabilities).map((name )=> (
-          (parsedData.vulnerabilities[name]['severity'] == 'critical') ? //test w/moderate
+          (parsedData.vulnerabilities[name]['severity'] == 'critical') ? 
           (tempObjCrtitical[name] = parsedData.vulnerabilities[name]) : 
           (parsedData.vulnerabilities[name]['severity'] == 'high') ? 
           (tempObjHigh[name] = parsedData.vulnerabilities[name]) :
