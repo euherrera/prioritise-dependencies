@@ -42,7 +42,7 @@ module.exports.Run =  (input) => {
           let newObj = {}
           assignNewObject(tempObjHigh, newObj)  
           write(newObj)
-        }else if (Object.keys().length) {
+        }else if (Object.keys(tempObjMod).length) {
          
           let newObj = {}
        
