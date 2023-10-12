@@ -7,20 +7,33 @@ module.exports.Run =  (input) => {
           console.log(error);
           return;
         }
-        const parsedData = JSON.parse(data);
+        const parsedData = JSON.parse(data); //data
+
         let arrCritical =[];
         let arrHigh =[];
-        let tempObj = {}
+        let arrModerate =[];
+        let arrLow =[];
+
+        let tempObjCrtitical = {}
+        let tempObjHigh = {}
+        let tempObjMod = {}
+        let tempObjLow = {}
+
         let auditReportVersion = parsedData.auditReportVersion;
         let metadata = parsedData.metadata;
 
         const extract= Object.keys(parsedData.vulnerabilities).map((name )=> (
           (parsedData.vulnerabilities[name]['severity'] == 'critical') ? //test w/moderate
-          (tempObj[name] = parsedData.vulnerabilities[name], arrCritical.push(tempObj)) : 
+          (tempObjCrtitical[name] = parsedData.vulnerabilities[name], arrCritical.push(tempObjCrtitical)) : 
           (parsedData.vulnerabilities[name]['severity'] == 'high') ? 
-          (tempObj[name] = parsedData.vulnerabilities[name], arrHigh.push(tempObj)) : ''
+          (tempObjHigh[name] = parsedData.vulnerabilities[name], arrHigh.push(tempObjHigh)) :
+          (parsedData.vulnerabilities[name]['severity'] == 'moderate') ? 
+          (tempObjMod[name] = parsedData.vulnerabilities[name], arrModerate.push(tempObjMod)) :
+          (parsedData.vulnerabilities[name]['severity'] == 'low') ? 
+          (tempObjLow[name] = parsedData.vulnerabilities[name], arrLow.push(tempObjLow)) : ''
       ))
 
+    
       const execute = () => {
         if (arrCritical.length){
       
@@ -32,7 +45,19 @@ module.exports.Run =  (input) => {
          
           let newObj = {}
           let obj;
-          assignNewObject(tempObj, newObj, obj)  
+          assignNewObject(arrHigh, newObj, obj)  
+          write(newObj)
+        }else if (arrModerate.length) {
+         
+          let newObj = {}
+          let obj;
+          assignNewObject(arrModerate, newObj, obj)  
+          write(newObj)
+        }else if (arrLow.length) {
+         
+          let newObj = {}
+          let obj;
+          assignNewObject(arrLow, newObj, obj)  
           write(newObj)
         }
       }
@@ -44,7 +69,7 @@ module.exports.Run =  (input) => {
           newObj.vulnerabilities = obj;
           newObj.auditReportVersion = auditReportVersion;
           newObj.metadata = metadata;
-          //newObj.createdAt = new Date().toISOString();
+          newObj.createdAt = new Date().toISOString();
          
       }
 

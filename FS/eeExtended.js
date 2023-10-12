@@ -1,4 +1,4 @@
-const EventEmitter = require('events'); //class
+const EventEmitter = require('events'); //class bult in class
 const input = require("./input"); 
 
 class EEExtended extends EventEmitter {
@@ -7,7 +7,7 @@ class EEExtended extends EventEmitter {
       console.time('execute');
       
         this.emit('run', data);
-       console.log(data)
+       
       
       console.timeEnd('execute');
       this.emit('end');
