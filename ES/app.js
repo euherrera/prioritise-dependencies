@@ -13,7 +13,8 @@ fs.readFile("../FS/output.json", "utf8", (err, jsonString) => {
         await res.send(jsonString);
         console.log("File data:", jsonString);
       }catch(error){
-        console.log("Error:", error.message);
+        res.status(500).send('something failed');
+        //console.log("Error:", error.message);
       }
     
   })
