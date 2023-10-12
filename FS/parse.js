@@ -29,29 +29,22 @@ module.exports.Run =  (input) => {
           (tempObjLow[name] = parsedData.vulnerabilities[name]) : ''
       ))
 
-      //console.log(tempObjHigh)
     
       const execute = () => {
         if (Object.keys(tempObjCrtitical).length){
-      
           let newObj = {}
           assignNewObject(tempObjCrtitical, newObj)
           write(newObj)
         }else if (Object.keys(tempObjHigh).length) {
-         
           let newObj = {}
           assignNewObject(tempObjHigh, newObj)  
           write(newObj)
         }else if (Object.keys(tempObjMod).length) {
-         
           let newObj = {}
-       
           assignNewObject(tempObjMod, newObj)  
           write(newObj)
         }else if (Object.keys(tempObjLow).length) {
-         
           let newObj = {}
-         
           assignNewObject(tempObjLow, newObj)  
           write(newObj)
         }
